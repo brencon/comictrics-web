@@ -16,7 +16,12 @@
       "Bash(aws cloudfront get-distribution:*)",
       "Bash(curl:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(aws acm describe-certificate:*)",
+      "Bash(nslookup:*)",
+      "Bash(rm:*)",
+      "Bash(aws s3 ls:*)",
+      "Bash(aws s3 rm:*)"
     ],
     "deny": [],
     "ask": []
