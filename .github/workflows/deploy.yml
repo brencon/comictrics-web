@@ -49,6 +49,7 @@ jobs:
         # Create list of expected files from codebase
         cat > expected_files.txt << 'EOF'
         index.html
+        about.html
         privacy.html
         support.html
         copyright.html
@@ -89,6 +90,7 @@ jobs:
         
         # Upload HTML files with 5-minute cache
         aws s3 cp index.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
+        aws s3 cp about.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
         aws s3 cp privacy.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
         aws s3 cp support.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
         aws s3 cp copyright.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
