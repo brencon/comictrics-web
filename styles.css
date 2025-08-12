@@ -101,13 +101,35 @@ p {
 /* About Page Styles */
 .about-hero {
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-    padding: calc(var(--navbar-height) + var(--spacing-2xl)) 0 var(--spacing-2xl) 0;
+    padding: calc(var(--navbar-height) + 4rem) 0 4rem 0;
     text-align: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.about-hero-content {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .about-hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: var(--spacing-lg);
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.about-hero .hero-subtitle {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+    font-weight: 400;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .about-content {
@@ -199,6 +221,23 @@ p {
 
 .nav-link.active {
     color: var(--accent-primary);
+}
+
+/* About Page Mobile Responsive */
+@media (max-width: 768px) {
+    .about-hero {
+        min-height: 50vh;
+        padding: calc(var(--navbar-height) + 2rem) 0 2rem 0;
+    }
+    
+    .about-hero-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .about-hero .hero-subtitle {
+        font-size: 1.2rem;
+    }
 }
 
 /* Button Styles */
