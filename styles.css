@@ -350,6 +350,8 @@ p {
     color: var(--text-muted);
     font-family: var(--font-family-body);
     margin-top: -2px;
+    letter-spacing: 0.02em;
+    text-align: center;
 }
 
 .nav-menu {
