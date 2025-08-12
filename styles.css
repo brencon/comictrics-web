@@ -330,7 +330,7 @@ p {
 .logo-text-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .logo-text {
@@ -351,7 +351,6 @@ p {
     font-family: var(--font-family-body);
     margin-top: -2px;
     letter-spacing: 0.02em;
-    text-align: center;
 }
 
 .nav-menu {
