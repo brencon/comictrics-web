@@ -325,12 +325,13 @@ p {
 .logo {
     height: 2rem;
     width: 2rem;
+    margin-top: -3px;
 }
 
 .logo-text-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .logo-text {
@@ -350,7 +351,7 @@ p {
     color: var(--text-muted);
     font-family: var(--font-family-body);
     margin-top: -2px;
-    letter-spacing: 0.02em;
+    margin-left: 2px;
 }
 
 .nav-menu {
@@ -429,7 +430,7 @@ p {
 
 .hero-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: var(--spacing-3xl);
     align-items: center;
     max-width: 1200px;
