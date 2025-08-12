@@ -1,0 +1,32 @@
+{
+  "name": "comictrics-web",
+  "version": "1.0.0",
+  "description": "Comictrics marketing website - Comic book collecting analytics",
+  "main": "deploy-aws.js",
+  "scripts": {
+    "deploy": "node deploy-aws.js",
+    "serve": "npx http-server . -p 3000 -o",
+    "validate": "npx html-validate *.html"
+  },
+  "keywords": [
+    "comic",
+    "collecting", 
+    "analytics",
+    "comictrics",
+    "static-site"
+  ],
+  "author": "Comic Indexer",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "aws-sdk": "^2.1500.0",
+    "mime-types": "^2.1.35"
+  },
+  "devDependencies": {
+    "html-validate": "^8.7.4",
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & Help - Comictrics</title>
+    <meta name="description" content="Get help with Comictrics comic book collecting app. Find answers to common questions, contact support, and learn how to use our features.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        .support-page {
+            padding-top: 120px;
+            padding-bottom: var(--spacing-3xl);
+            min-height: 100vh;
+        }
+        
+        .support-header {
+            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: var(--spacing-3xl) 0;
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .support-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 30% 30%, rgba(234, 179, 8, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .support-header h1 {
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .support-header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-3xl);
+        }
+        
+        .quick-link-card {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .quick-link-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(234, 179, 8, 0.3);
+        }
+        
+        .quick-link-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            margin-bottom: var(--spacing-lg);
+            color: var(--bg-primary);
+            font-size: 1.5rem;
+        }
+        
+        .support-section {
+            margin-bottom: var(--spacing-3xl);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--bg-tertiary);
+        }
+        
+        .section-title i {
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+        }
+        
+        .section-title h2 {
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+        
+        .faq-grid {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+        
+        .faq-item {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .faq-question {
+            padding: var(--spacing-lg);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+        
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .faq-question h3 {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .faq-toggle {
+            color: var(--accent-primary);
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 var(--spacing-lg);
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 var(--spacing-lg) var(--spacing-lg);
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .faq-answer ul {
+            color: var(--text-secondary);
+            padding-left: var(--spacing-lg);
+        }
+        
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .feature-card i {
+            font-size: 1.25rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: var(--spacing-xs) 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .feature-list i {
+            color: var(--success);
+            font-size: 0.875rem;
+            width: 16px;
+        }
+        
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-card p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .contact-info {
+            background: var(--bg-primary);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .contact-info strong {
+            color: var(--accent-primary);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: var(--spacing-lg);
+            transition: all 0.2s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--accent-secondary);
+            transform: translateX(-2px);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .status-available {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+        
+        .status-coming-soon {
+            background: rgba(234, 179, 8, 0.2);
+            color: var(--accent-primary);
+        }
+        
+        .troubleshooting-steps {
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .troubleshooting-steps ol {
+            padding-left: var(--spacing-lg);
+        }
+        
+        .troubleshooting-steps li {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .alert-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .alert-box p {
+            color: var(--error);
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .info-box p {
+            color: #60A5FA;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/comictrics-logo.png" alt="Comictrics" class="logo">
+                <span class="logo-text">Comictrics</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#pricing" class="nav-link">Pricing</a>
+                <a href="privacy.html" class="nav-link">Privacy</a>
+                <a href="support.html" class="nav-link">Support</a>
+                <a href="index.html#download" class="nav-link cta-button">Download App</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Support Content -->
+    <div class="support-page">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+            
+            <div class="support-header">
+                <h1>Support & Help Center</h1>
+                <p>Get help with Comictrics and learn how to make the most of your comic book collecting</p>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <a href="#getting-started" class="quick-link-card">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Getting Started</h3>
+                    <p>Learn the basics and set up your account</p>
+                </a>
+                
+                <a href="#faq" class="quick-link-card">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>FAQ</h3>
+                    <p>Find answers to common questions</p>
+                </a>
+                
+                <a href="#troubleshooting" class="quick-link-card">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Troubleshooting</h3>
+                    <p>Fix common issues and problems</p>
+                </a>
+                
+                <a href="#contact" class="quick-link-card">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Contact Support</h3>
+                    <p>Get personalized help from our team</p>
+                </a>
+            </div>
+
+            <!-- Getting Started -->
+            <section id="getting-started" class="support-section">
+                <div class="section-title">
+                    <i class="fas fa-rocket"></i>
+                    <h2>Getting Started</h2>
+                </div>
+                
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <h3><i class="fas fa-user-plus"></i> Account Setup</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Create account with email or Google Sign-In</li>
+                            <li><i class="fas fa-check"></i> Verify your email address</li>
+                            <li><i class="fas fa-check"></i> Set up your profile information</li>
+                            <li><i class="fas fa-check"></i> Choose your subscription plan</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3><i class="fas fa-star"></i> Understanding Daily Picks</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Raw FMV (Fair Market Value) pricing</li>
+                            <li><i class="fas fa-check"></i> CGC 9.4 and 9.8 graded values</li>
+                            <li><i class="fas fa-check"></i> Your Target NM Price recommendations</li>
+                            <li><i class="fas fa-check"></i> Value assessment scoring (1-100)</li>
+                            <li><i class="fas fa-check"></i> Potential value analysis</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3><i class="fas fa-calculator"></i> Customizing Preferences</h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Set custom CGC grading costs</li>
+                            <li><i class="fas fa-check"></i> Configure clean & press fees</li>
+                            <li><i class="fas fa-check"></i> Adjust shipping cost estimates</li>
+                            <li><i class="fas fa-check"></i> Enable/disable push notifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Overview -->
+            <section id="features-overview" class="support-section">
+                <div class="section-title">
+                    <i class="fas fa-list"></i>
+                    <h2>Features Overview</h2>
+                </div>
+                
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <h3><i class="fas fa-calendar-day"></i> Current Features <span class="status-indicator status-available">Available</span></h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Daily comic picks with detailed analysis</li>
+                            <li><i class="fas fa-check"></i> Comprehensive grading cost calculator</li>
+                            <li><i class="fas fa-check"></i> Value assessment scoring system</li>
+                            <li><i class="fas fa-check"></i> User preferences and cost customization</li>
+                            <li><i class="fas fa-check"></i> Push notification system</li>
+                            <li><i class="fas fa-check"></i> Full accessibility support</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3><i class="fas fa-chart-line"></i> Coming Soon <span class="status-indicator status-coming-soon">In Development</span></h3>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-clock"></i> Market Analytics dashboard</li>
+                            <li><i class="fas fa-clock"></i> Portfolio tracking and management</li>
+                            <li><i class="fas fa-clock"></i> Advanced filtering and search</li>
+                            <li><i class="fas fa-clock"></i> Historical data analysis</li>
+                            <li><i class="fas fa-clock"></i> Price trend notifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section id="faq" class="support-section">
+                <div class="section-title">
+                    <i class="fas fa-question-circle"></i>
+                    <h2>Frequently Asked Questions</h2>
+                </div>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What is Comictrics and how does it work?</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Comictrics provides one expertly analyzed comic book pick each day to help you decide if it's worth buying to clean, press, and grade. Our analysis includes:</p>
+                            <ul>
+                                <li>Current market value and price guides</li>
+                                <li>CGC grading value projections</li>
+                                <li>Risk assessment scoring (1-100 scale)</li>
+                                <li>Complete cost breakdown including cleaning, pressing, and grading fees</li>
+                            </ul>
+                            <p>We analyze market data, availability, and grading potential to help you make informed decisions about which comics are worth the investment in professional grading.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do I understand the Value Assessment Score?</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our Value Assessment Score rates each comic on a scale of 1-100, where:</p>
+                            <ul>
+                                <li><strong>1-30 (Green):</strong> Lower scoring, stable collecting opportunity</li>
+                                <li><strong>31-60 (Yellow):</strong> Moderate scoring, good collecting potential</li>
+                                <li><strong>61-80 (Orange):</strong> Higher scoring, significant collecting interest</li>
+                                <li><strong>81-100 (Red):</strong> Highest scoring, premium collecting opportunity</li>
+                            </ul>
+                            <p>The score considers factors like market trends, supply availability, demand patterns, and historical performance data.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What's the difference between subscription plans?</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Free Trial (3 days):</strong></p>
+                            <ul>
+                                <li>Daily value pick</li>
+                                <li>Market value analysis</li>
+                                <li>Grading cost breakdown</li>
+                                <li>Risk assessment</li>
+                            </ul>
+                            <p><strong>Monthly ($9.99/month):</strong></p>
+                            <ul>
+                                <li>Daily value pick</li>
+                                <li>Market value analysis</li>
+                                <li>Grading cost breakdown</li>
+                                <li>Risk assessment</li>
+                                <li>Monthly billing</li>
+                            </ul>
+                            <p><strong>Annual ($99.99/year):</strong></p>
+                            <ul>
+                                <li>Daily value pick</li>
+                                <li>Market value analysis</li>
+                                <li>Grading cost breakdown</li>
+                                <li>Risk assessment</li>
+                                <li>17% savings (2 months free)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How do I customize my grading cost preferences?</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>You can customize your grading costs in the app's Preferences section:</p>
+                            <div class="troubleshooting-steps">
+                                <ol>
+                                    <li>Open the Comictrics app</li>
+                                    <li>Go to Settings or Profile</li>
+                                    <li>Select "Preferences" or "Grading Costs"</li>
+                                    <li>Adjust the following settings:</li>
+                                    <ul>
+                                        <li>CGC grading fees</li>
+                                        <li>Clean & press costs</li>
+                                        <li>Shipping fees</li>
+                                        <li>Regional cost adjustments</li>
+                                    </ul>
+                                    <li>Save your preferences</li>
+                                </ol>
+                            </div>
+                            <p>These custom costs will be used in all future investment calculations and recommendations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Can I cancel my subscription anytime?</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, you can cancel your subscription at any time through your device's app store:</p>
+                            <div class="troubleshooting-steps">
+                                <p><strong>iOS (iPhone/iPad):</strong></p>
+                                <ol>
+                                    <li>Open Settings app</li>
+                                    <li>Tap your Apple ID at the top</li>
+                                    <li>Tap "Subscriptions"</li>
+                                    <li>Find Comictrics and tap "Cancel Subscription"</li>
+                                </ol>
+                                <p><strong>Android:</strong></p>
+                                <ol>
+                                    <li>Open Google Play Store</li>
+                                    <li>Tap Menu > Subscriptions</li>
+                                    <li>Find Comictrics and tap "Cancel"</li>
+                                </ol>
+                            </div>
+                            <p>You'll retain access to premium features until the end of your billing period.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What devices are supported?</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Comictrics is available for iOS and Android devices.</p>
+                            <p>The app includes full accessibility features:</p>
+                            <ul>
+                                <li>VoiceOver support (iOS)</li>
+                                <li>TalkBack support (Android)</li>
+                                <li>Dynamic Type support for text sizing</li>
+                                <li>High contrast mode compatibility</li>
+                                <li>Reduce motion support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Troubleshooting -->
+            <section id="troubleshooting" class="support-section">
+                <div class="section-title">
+                    <i class="fas fa-tools"></i>
+                    <h2>Troubleshooting</h2>
+                </div>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>App won't load or crashes frequently</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Try these solutions in order:</p>
+                            <div class="troubleshooting-steps">
+                                <ol>
+                                    <li><strong>Force close and restart the app</strong></li>
+                                    <li><strong>Check your internet connection</strong> - Ensure you have a stable WiFi or cellular connection</li>
+                                    <li><strong>Update the app</strong> - Check the App Store/Google Play for updates</li>
+                                    <li><strong>Restart your device</strong> - Power off and on your phone/tablet</li>
+                                    <li><strong>Clear app cache</strong> (Android) or reinstall the app</li>
+                                    <li><strong>Check device storage</strong> - Ensure you have at least 1GB free space</li>
+                                </ol>
+                            </div>
+                            <div class="alert-box">
+                                <p><i class="fas fa-exclamation-triangle"></i> If crashes persist, please contact support with your device model and iOS/Android version.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Login issues - Can't sign in to my account</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Email/Password Login Issues:</strong></p>
+                            <div class="troubleshooting-steps">
+                                <ol>
+                                    <li>Verify your email address is correct</li>
+                                    <li>Try the "Forgot Password" option</li>
+                                    <li>Check your spam/junk folder for reset emails</li>
+                                    <li>Ensure your password meets requirements (8+ characters)</li>
+                                </ol>
+                            </div>
+                            <p><strong>Google Sign-In Problems:</strong></p>
+                            <div class="troubleshooting-steps">
+                                <ol>
+                                    <li>Update Google Play Services (Android)</li>
+                                    <li>Clear Google app cache</li>
+                                    <li>Try using email/password instead</li>
+                                    <li>Contact support if you see "Access blocked" errors</li>
+                                </ol>
+                            </div>
+                            <div class="info-box">
+                                <p><i class="fas fa-info-circle"></i> Google Sign-In requires proper OAuth configuration and may not be available in all regions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Daily picks not loading or updating</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>If daily picks aren't loading:</p>
+                            <div class="troubleshooting-steps">
+                                <ol>
+                                    <li><strong>Check your internet connection</strong> - Daily picks require an active connection</li>
+                                    <li><strong>Pull to refresh</strong> - Swipe down on the main screen to refresh content</li>
+                                    <li><strong>Verify subscription status</strong> - Ensure your subscription is active</li>
+                                    <li><strong>Check the time</strong> - New picks are typically released early morning EST</li>
+                                    <li><strong>Force close and reopen the app</strong></li>
+                                </ol>
+                            </div>
+                            <div class="info-box">
+                                <p><i class="fas fa-info-circle"></i> Daily picks are updated once per day, usually between 6-9 AM Eastern Time.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Subscription not recognized or trial issues</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>For subscription problems:</p>
+                            <div class="troubleshooting-steps">
+                                <ol>
+                                    <li><strong>Sign out and back in</strong> - This refreshes subscription status</li>
+                                    <li><strong>Check your app store subscriptions</strong> - Verify the subscription is active</li>
+                                    <li><strong>Ensure you're using the same Apple ID/Google account</strong></li>
+                                    <li><strong>Wait up to 24 hours</strong> - Subscription changes can take time to sync</li>
+                                    <li><strong>Contact support</strong> with your receipt number if issues persist</li>
+                                </ol>
+                            </div>
+                            <div class="alert-box">
+                                <p><i class="fas fa-exclamation-triangle"></i> Subscriptions are managed through Apple App Store or Google Play Store, not directly through Comictrics.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Push notifications not working</h3>
+                            <i class="fas fa-plus faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To fix notification issues:</p>
+                            <div class="troubleshooting-steps">
+                                <ol>
+                                    <li><strong>Check app notification settings</strong> - Enable notifications in Comictrics settings</li>
+                                    <li><strong>Check device notification settings</strong> - Allow notifications for Comictrics in your device settings</li>
+                                    <li><strong>Restart the app</strong> - Force close and reopen Comictrics</li>
+                                    <li><strong>Check Do Not Disturb mode</strong> - Ensure DND isn't blocking notifications</li>
+                                    <li><strong>Reinstall the app</strong> - This resets notification permissions</li>
+                                </ol>
+                            </div>
+                            <p><strong>Device-specific steps:</strong></p>
+                            <ul>
+                                <li><strong>iOS:</strong> Settings > Notifications > Comictrics > Allow Notifications</li>
+                                <li><strong>Android:</strong> Settings > Apps > Comictrics > Notifications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Support -->
+            <section id="contact" class="support-section">
+                <div class="section-title">
+                    <i class="fas fa-envelope"></i>
+                    <h2>Contact Support</h2>
+                </div>
+                
+                <div class="contact-cards">
+                    <div class="contact-card">
+                        <h3><i class="fas fa-envelope"></i> General Support</h3>
+                        <p>Get help with app features, account issues, and general questions.</p>
+                        <div class="contact-info">
+                            <p><strong>Email:</strong> comicindexer@gmail.com</p>
+                            <p><strong>Response Time:</strong> 24-48 hours</p>
+                            <p><strong>Available:</strong> Monday-Friday, 9 AM - 6 PM EST</p>
+                        </div>
+                        <a href="mailto:comicindexer@gmail.com?subject=Comictrics Support Request" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i>
+                            Send Email
+                        </a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h3><i class="fas fa-bug"></i> Bug Reports</h3>
+                        <p>Report app crashes, errors, or unexpected behavior.</p>
+                        <div class="contact-info">
+                            <p><strong>Email:</strong> comicindexer@gmail.com</p>
+                            <p><strong>Response Time:</strong> 12-24 hours</p>
+                            <p><strong>Include:</strong> Device model, OS version, steps to reproduce</p>
+                        </div>
+                        <a href="mailto:comicindexer@gmail.com?subject=Bug Report - Comictrics" class="btn btn-secondary">
+                            <i class="fas fa-bug"></i>
+                            Report Bug
+                        </a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h3><i class="fas fa-lightbulb"></i> Feature Requests</h3>
+                        <p>Suggest new features or improvements for future updates.</p>
+                        <div class="contact-info">
+                            <p><strong>Email:</strong> comicindexer@gmail.com</p>
+                            <p><strong>Response Time:</strong> 3-5 business days</p>
+                            <p><strong>Include:</strong> Detailed description, use case examples</p>
+                        </div>
+                        <a href="mailto:comicindexer@gmail.com?subject=Feature Request - Comictrics" class="btn btn-secondary">
+                            <i class="fas fa-lightbulb"></i>
+                            Share Idea
+                        </a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h3><i class="fas fa-shield-alt"></i> Privacy & Security</h3>
+                        <p>Questions about data handling, privacy, or security concerns.</p>
+                        <div class="contact-info">
+                            <p><strong>Email:</strong> comicindexer@gmail.com</p>
+                            <p><strong>Response Time:</strong> 24-48 hours</p>
+                            <p><strong>Priority:</strong> Security issues get immediate attention</p>
+                        </div>
+                        <a href="mailto:comicindexer@gmail.com?subject=Privacy Inquiry - Comictrics" class="btn btn-secondary">
+                            <i class="fas fa-shield-alt"></i>
+                            Privacy Help
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="info-box" style="margin-top: var(--spacing-xl);">
+                    <p><i class="fas fa-info-circle"></i> 
+                        <strong>Before contacting support:</strong> Please check this help page and try the troubleshooting steps above. 
+                        Include your device information, app version, and detailed description of the issue for faster assistance.
+                    </p>
+                </div>
+                
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="index.html#download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="support.html">Help Center</a></li>
+                        <li><a href="support.html#contact">Contact Us</a></li>
+                        <li><a href="support.html#faq">FAQ</a></li>
+                    </ul>
+                    <h4>Connect</h4>
+                    <ul class="social-links">
+                        <li>
+                            <a href="https://bsky.app/profile/comicindexer.bsky.social" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Comic Indexer on Bluesky">
+                                <i class="fas fa-cloud"></i>
+                                <span>Bluesky</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/comicindexer/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Comic Indexer on Instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://x.com/ComicIndexer" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Comic Indexer on X">
+                                <i class="fab fa-twitter"></i>
+                                <span>X</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="copyright.html">Copyright</a></li>
+                        <li><a href="privacy.html#terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Comic Indexer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // FAQ toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other FAQ items
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+                    
+                    // Toggle current item
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
