@@ -39,8 +39,54 @@ jobs:
         aws sts get-caller-identity
         aws s3 ls s3://${{ env.S3_BUCKET }} || echo "Bucket access check completed"
         
+    - name: Clean up orphaned files in S3
+      run: |
+        echo "🔍 Scanning for orphaned files in S3..."
+        
+        # Get list of files in S3 (excluding directories)
+        aws s3api list-objects-v2 --bucket ${{ env.S3_BUCKET }} --query 'Contents[].Key' --output text > s3_files.txt
+        
+        # Create list of expected files from codebase
+        cat > expected_files.txt << 'EOF'
+        index.html
+        privacy.html
+        support.html
+        copyright.html
+        styles.css
+        script.js
+        favicon.ico
+        assets/comictrics-logo.png
+        EOF
+        
+        # Find orphaned files (in S3 but not in expected list)
+        echo "📋 Expected files:"
+        cat expected_files.txt
+        echo ""
+        echo "📁 Files in S3:"
+        cat s3_files.txt
+        echo ""
+        
+        # Check for orphans and delete them
+        orphans_found=false
+        while IFS= read -r s3_file; do
+          if ! grep -Fxq "$s3_file" expected_files.txt; then
+            echo "🗑️  Orphaned file found: $s3_file"
+            aws s3 rm "s3://${{ env.S3_BUCKET }}/$s3_file"
+            orphans_found=true
+          fi
+        done < s3_files.txt
+        
+        if [ "$orphans_found" = false ]; then
+          echo "✅ No orphaned files found in S3"
+        fi
+        
+        # Clean up temp files
+        rm -f s3_files.txt expected_files.txt
+
     - name: Sync files to S3
       run: |
+        echo "📤 Uploading website files to S3..."
+        
         # Upload HTML files with 5-minute cache
         aws s3 cp index.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
         aws s3 cp privacy.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
@@ -58,6 +104,8 @@ jobs:
         
         # Upload assets
         aws s3 cp assets/ s3://${{ env.S3_BUCKET }}/assets/ --recursive --cache-control "max-age=86400"
+        
+        echo "✅ All files uploaded successfully"
         
     - name: Create CloudFront invalidation
       run: |
