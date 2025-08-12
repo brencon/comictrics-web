@@ -43,8 +43,8 @@ jobs:
       run: |
         echo "🔍 Scanning for orphaned files in S3..."
         
-        # Get list of files in S3 (excluding directories)
-        aws s3api list-objects-v2 --bucket ${{ env.S3_BUCKET }} --query 'Contents[].Key' --output text > s3_files.txt
+        # Get list of files in S3 (one per line)
+        aws s3 ls s3://${{ env.S3_BUCKET }} --recursive | awk '{print $4}' > s3_files.txt
         
         # Create list of expected files from codebase
         cat > expected_files.txt << 'EOF'
