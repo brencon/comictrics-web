@@ -2,6 +2,8 @@
 
 Marketing website for Comictrics - Comic Book Investment Analytics App
 
+Public site artifacts for Comictrics
+
 ## Overview
 
 This is a modern, responsive marketing website for the Comictrics mobile application. The site features:
