@@ -1,0 +1,76 @@
+name: Deploy to AWS S3
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-west-2
+  S3_BUCKET: comictrics-web
+  CLOUDFRONT_DISTRIBUTION_ID: E15LH122NSBXHW
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+        
+    - name: Verify AWS configuration
+      run: |
+        aws sts get-caller-identity
+        aws s3 ls s3://${{ env.S3_BUCKET }} || echo "Bucket access check completed"
+        
+    - name: Sync files to S3
+      run: |
+        # Upload HTML files with 5-minute cache
+        aws s3 cp index.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
+        aws s3 cp privacy.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
+        aws s3 cp support.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
+        aws s3 cp copyright.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
+        
+        # Upload CSS with 24-hour cache
+        aws s3 cp styles.css s3://${{ env.S3_BUCKET }}/ --content-type "text/css" --cache-control "max-age=86400"
+        
+        # Upload JS with 24-hour cache
+        aws s3 cp script.js s3://${{ env.S3_BUCKET }}/ --content-type "application/javascript" --cache-control "max-age=86400"
+        
+        # Upload favicon
+        aws s3 cp favicon.ico s3://${{ env.S3_BUCKET }}/ --content-type "image/x-icon" --cache-control "max-age=86400"
+        
+        # Upload assets
+        aws s3 cp assets/ s3://${{ env.S3_BUCKET }}/assets/ --recursive --cache-control "max-age=86400"
+        
+    - name: Create CloudFront invalidation
+      run: |
+        aws cloudfront create-invalidation \
+          --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+          --paths "/*" \
+          --query 'Invalidation.Id' \
+          --output text
+          
+    - name: Deployment summary
+      run: |
+        echo "✅ Deployment completed successfully!"
+        echo "🌐 Website: https://comictrics.com"
+        echo "📁 S3 Bucket: s3://${{ env.S3_BUCKET }}"
+        echo "🔄 CloudFront invalidation created"
+        echo "⏰ Changes will be live within 1-2 minutes"
