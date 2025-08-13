@@ -357,6 +357,7 @@ p {
     font-family: var(--font-family-body);
     margin-top: -2px;
     margin-left: 2px;
+    text-decoration: none;
 }
 
 .nav-menu {
