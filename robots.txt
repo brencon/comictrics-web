@@ -1,0 +1,64 @@
+# Robots.txt for Comictrics - Comic Book Analytics
+# Optimized for SEO and search engine crawling
+
+# Allow all crawlers access to public content
+User-agent: *
+Allow: /
+
+# Specific permissions for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Block access to sensitive or non-public files
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /package*.json
+Disallow: /deploy-aws.js
+Disallow: /.claude/
+Disallow: /README.md
+
+# Allow access to assets and important files
+Allow: /assets/
+Allow: /favicon.ico
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Sitemap location
+Sitemap: https://comictrics.com/sitemap.xml
+
+# Additional sitemaps (for future expansion)
+# Sitemap: https://comictrics.com/sitemap-images.xml
+# Sitemap: https://comictrics.com/sitemap-blog.xml
+
+# Crawl-delay for all other bots
+User-agent: *
+Crawl-delay: 5
+
+# Block known bad bots and scrapers
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# Cache directive for better performance
+# This helps search engines understand content freshness
+Host: comictrics.com
