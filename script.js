@@ -103,6 +103,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Update current date in phone mockup
+document.addEventListener('DOMContentLoaded', function() {
+    const currentDateElement = document.getElementById('current-date');
+    if (currentDateElement) {
+        const today = new Date();
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        };
+        currentDateElement.textContent = today.toLocaleDateString('en-US', options);
+    }
+});
+
 // Phone mockup interactive demo
 document.addEventListener('DOMContentLoaded', function() {
     const phoneMockup = document.querySelector('.phone-mockup');
@@ -111,22 +125,31 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add subtle animation to the risk bar
         const riskFill = document.querySelector('.risk-fill');
         if (riskFill) {
+            const riskScores = [85, 62, 27]; // Green, Yellow, Red
+            let currentIndex = 0;
+            
             setInterval(() => {
-                const currentWidth = parseFloat(riskFill.style.width) || 25;
-                const newWidth = currentWidth === 25 ? 35 : 25;
+                const newWidth = riskScores[currentIndex];
                 riskFill.style.width = `${newWidth}%`;
                 
-                // Update risk value color based on width
+                // Update risk value color based on score (higher = better)
                 const riskValue = document.querySelector('.risk-value');
                 if (riskValue) {
-                    if (newWidth <= 30) {
-                        riskValue.style.color = 'var(--success)';
-                        riskValue.textContent = `${newWidth}/100`;
+                    if (newWidth >= 70) {
+                        riskValue.style.color = 'var(--success)'; // Green for high score (very reliable)
+                        riskFill.style.background = 'linear-gradient(90deg, var(--success), #22c55e)';
+                    } else if (newWidth >= 40) {
+                        riskValue.style.color = 'var(--accent-primary)'; // Yellow for medium score
+                        riskFill.style.background = 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))';
                     } else {
-                        riskValue.style.color = 'var(--accent-primary)';
-                        riskValue.textContent = `${newWidth}/100`;
+                        riskValue.style.color = 'var(--error)'; // Red for low score (unreliable)
+                        riskFill.style.background = 'linear-gradient(90deg, var(--error), #dc2626)';
                     }
+                    riskValue.textContent = `${newWidth}`;
                 }
+                
+                // Move to next score in cycle
+                currentIndex = (currentIndex + 1) % riskScores.length;
             }, 3000);
         }
         
