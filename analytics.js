@@ -5,54 +5,26 @@
 const GA_MEASUREMENT_ID = 'G-EKJJM5Y2CZ';
 const GTM_ID = 'GTM-XXXXXXX';
 
-// Initialize Google Consent Mode v2 and Analytics
+// Enhanced Analytics Configuration (GA4 is already loaded in index.html)
 (function() {
-    // Initialize dataLayer and gtag first
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.gtag = gtag;
+    // Ensure gtag is available
+    if (typeof gtag === 'undefined') {
+        console.warn('⚠️ gtag not found - analytics.js should load after GA4 initialization');
+        return;
+    }
     
-    // Set default consent state (before any tracking loads)
-    gtag('consent', 'default', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied', 
-        ad_personalization: 'denied',
-        analytics_storage: 'denied',
-        functionality_storage: 'granted',
-        personalization_storage: 'denied',
-        security_storage: 'granted',
-        wait_for_update: 500 // Wait up to 500ms for consent update
+    // Configure enhanced tracking after consent is granted
+    window.addEventListener('consent_update', function(e) {
+        if (e.detail && e.detail.analytics_storage === 'granted') {
+            // Enable enhanced measurements when consent is granted
+            gtag('config', GA_MEASUREMENT_ID, {
+                allow_google_signals: true,
+                send_page_view: true
+            });
+            
+            console.log('✅ Enhanced analytics enabled after consent');
+        }
     });
-
-    // Load GA4 script
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    document.head.appendChild(script);
-    
-    // Initialize GA4 after script loads
-    script.onload = function() {
-        gtag('js', new Date());
-        gtag('config', GA_MEASUREMENT_ID, {
-            page_title: document.title,
-            page_location: window.location.href,
-            anonymize_ip: true, // GDPR compliance
-            allow_google_signals: false, // Will be enabled with consent
-            custom_map: {
-                'custom_dimension_1': 'user_type',
-                'custom_dimension_2': 'engagement_level',
-                'custom_dimension_3': 'conversion_path'
-            }
-        });
-
-        // Enhanced ecommerce tracking
-        gtag('config', GA_MEASUREMENT_ID, {
-            currency: 'USD',
-            send_page_view: false // We'll send manually after consent
-        });
-        
-        console.log('🔒 GA4 initialized with Consent Mode v2');
-    };
 })();
 
 // Core Web Vitals Monitoring
