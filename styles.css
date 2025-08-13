@@ -91,11 +91,16 @@ p {
     color: var(--text-secondary);
 }
 
-/* Monospace font for data, prices, and code elements */
-.price, .data, .metric, .value, code, pre, 
-.pricing-price, .stat-value {
+/* Monospace font for data and code elements */
+.data, .metric, .value, code, pre, 
+.stat-value {
     font-family: var(--font-family-mono);
     font-weight: 500;
+}
+
+/* Use heading font for pricing for cleaner numbers */
+.price, .pricing-price, .currency, .amount, .period {
+    font-family: var(--font-family-heading);
 }
 
 /* About Page Styles */
@@ -782,6 +787,7 @@ p {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--accent-primary);
+    margin-right: 0.1rem;
 }
 
 .amount {

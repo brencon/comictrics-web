@@ -21,7 +21,8 @@
       "Bash(nslookup:*)",
       "Bash(rm:*)",
       "Bash(aws s3 ls:*)",
-      "Bash(aws s3 rm:*)"
+      "Bash(aws s3 rm:*)",
+      "Bash(aws cloudfront create-invalidation:*)"
     ],
     "deny": [],
     "ask": []
