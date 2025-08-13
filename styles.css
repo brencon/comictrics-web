@@ -340,6 +340,7 @@ p {
 }
 
 .logo-text {
+    font-family: 'Kumbh Sans', sans-serif;
     font-size: 1.5rem;
     font-weight: 800;
     color: var(--text-primary);
