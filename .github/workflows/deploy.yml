@@ -55,7 +55,11 @@ jobs:
         copyright.html
         styles.css
         script.js
+        analytics.js
+        consent-manager.js
         favicon.ico
+        robots.txt
+        sitemap.xml
         assets/comictrics-logo.png
         EOF
         
@@ -98,8 +102,14 @@ jobs:
         # Upload CSS with 24-hour cache
         aws s3 cp styles.css s3://${{ env.S3_BUCKET }}/ --content-type "text/css" --cache-control "max-age=86400"
         
-        # Upload JS with 24-hour cache
+        # Upload JS files with 24-hour cache
         aws s3 cp script.js s3://${{ env.S3_BUCKET }}/ --content-type "application/javascript" --cache-control "max-age=86400"
+        aws s3 cp analytics.js s3://${{ env.S3_BUCKET }}/ --content-type "application/javascript" --cache-control "max-age=86400"
+        aws s3 cp consent-manager.js s3://${{ env.S3_BUCKET }}/ --content-type "application/javascript" --cache-control "max-age=86400"
+        
+        # Upload SEO files
+        aws s3 cp robots.txt s3://${{ env.S3_BUCKET }}/ --content-type "text/plain" --cache-control "max-age=3600"
+        aws s3 cp sitemap.xml s3://${{ env.S3_BUCKET }}/ --content-type "application/xml" --cache-control "max-age=3600"
         
         # Upload favicon
         aws s3 cp favicon.ico s3://${{ env.S3_BUCKET }}/ --content-type "image/x-icon" --cache-control "max-age=86400"
