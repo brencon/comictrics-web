@@ -1002,8 +1002,16 @@ p {
 
     .hero-container {
         grid-template-columns: 1fr;
-        gap: var(--spacing-xl);
+        gap: var(--spacing-lg);
         text-align: center;
+    }
+    
+    .hero-content {
+        order: 1;
+    }
+    
+    .hero-visual {
+        order: 2;
     }
 
     .hero-title {
@@ -1020,8 +1028,27 @@ p {
     }
 
     .phone-mockup {
-        width: 240px;
-        height: 480px;
+        width: 320px;
+        height: 600px;
+        max-width: 90vw;
+    }
+    
+    .daily-pick-card {
+        padding: var(--spacing-md);
+    }
+    
+    .daily-pick-card h3 {
+        font-size: 0.75rem;
+    }
+    
+    .daily-pick-card h4 {
+        font-size: 1.125rem;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .price-item .label,
+    .price-item .value {
+        font-size: 0.8rem;
     }
 
     .features-grid {
@@ -1070,8 +1097,48 @@ p {
     }
 
     .phone-mockup {
-        width: 200px;
-        height: 400px;
+        width: 280px;
+        height: 520px;
+        max-width: 85vw;
+    }
+    
+    .hero-visual {
+        margin-top: var(--spacing-lg);
+        display: flex;
+        justify-content: center;
+    }
+    
+    .daily-pick-card {
+        padding: var(--spacing-sm);
+    }
+    
+    .daily-pick-card h3 {
+        font-size: 0.7rem;
+        margin-bottom: 0.125rem;
+    }
+    
+    .daily-pick-card h4 {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .price-item {
+        padding: 0.125rem 0;
+    }
+    
+    .price-item .label,
+    .price-item .value {
+        font-size: 0.75rem;
+    }
+    
+    .risk-score {
+        font-size: 0.75rem;
+        gap: 0.25rem;
+    }
+    
+    .price-item.highlight {
+        padding: 0.25rem;
+        margin: 0.25rem 0;
     }
 
     .features-grid {
@@ -1089,6 +1156,29 @@ p {
 
     .download-btn {
         min-width: 160px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 375px) {
+    .phone-mockup {
+        width: 260px;
+        height: 480px;
+        max-width: 80vw;
+    }
+    
+    .hero {
+        padding-top: 100px;
+        min-height: auto;
+    }
+    
+    .daily-pick-card h4 {
+        font-size: 0.9rem;
+    }
+    
+    .price-item .label,
+    .price-item .value {
+        font-size: 0.7rem;
     }
 }
 
