@@ -22,7 +22,15 @@
       "Bash(rm:*)",
       "Bash(aws s3 ls:*)",
       "Bash(aws s3 rm:*)",
-      "Bash(aws cloudfront create-invalidation:*)"
+      "Bash(aws cloudfront create-invalidation:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(set AWS_ACCESS_KEY_ID)",
+      "Bash(set AWS_SECRET_ACCESS_KEY)",
+      "Bash(aws configure:*)",
+      "Bash(aws s3api get-public-access-block:*)",
+      "Bash(aws cloudfront:*)"
     ],
     "deny": [],
     "ask": []
