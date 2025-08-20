@@ -502,7 +502,7 @@ p {
 .phone-mockup {
     position: relative;
     width: 280px;
-    height: 560px;
+    height: 520px;
     margin: 0 auto;
     background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
     border-radius: 2.5rem;
@@ -530,7 +530,7 @@ p {
 .phone-mockup::after {
     content: '';
     position: absolute;
-    bottom: 1.2rem;
+    bottom: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
     width: 50px;
@@ -563,7 +563,7 @@ p {
 }
 
 .app-preview {
-    padding: var(--spacing-xl) var(--spacing-lg);
+    padding: var(--spacing-xl) var(--spacing-lg) 0;
     height: 100%;
     display: flex;
     flex-direction: column;
