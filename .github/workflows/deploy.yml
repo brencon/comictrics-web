@@ -53,6 +53,7 @@ jobs:
         privacy.html
         support.html
         copyright.html
+        delete-account.html
         styles.css
         script.js
         analytics.js
@@ -61,6 +62,8 @@ jobs:
         robots.txt
         sitemap.xml
         assets/comictrics-logo.png
+        js/jsm-integration.js
+        js/common.js
         EOF
         
         # Find orphaned files (in S3 but not in expected list)
@@ -98,6 +101,7 @@ jobs:
         aws s3 cp privacy.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
         aws s3 cp support.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
         aws s3 cp copyright.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
+        aws s3 cp delete-account.html s3://${{ env.S3_BUCKET }}/ --content-type "text/html" --cache-control "max-age=300"
         
         # Upload CSS with 24-hour cache
         aws s3 cp styles.css s3://${{ env.S3_BUCKET }}/ --content-type "text/css" --cache-control "max-age=86400"
@@ -106,6 +110,9 @@ jobs:
         aws s3 cp script.js s3://${{ env.S3_BUCKET }}/ --content-type "application/javascript" --cache-control "max-age=86400"
         aws s3 cp analytics.js s3://${{ env.S3_BUCKET }}/ --content-type "application/javascript" --cache-control "max-age=86400"
         aws s3 cp consent-manager.js s3://${{ env.S3_BUCKET }}/ --content-type "application/javascript" --cache-control "max-age=86400"
+        
+        # Upload JS directory with 24-hour cache
+        aws s3 cp js/ s3://${{ env.S3_BUCKET }}/js/ --recursive --content-type "application/javascript" --cache-control "max-age=86400"
         
         # Upload SEO files
         aws s3 cp robots.txt s3://${{ env.S3_BUCKET }}/ --content-type "text/plain" --cache-control "max-age=3600"

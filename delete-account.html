@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Account Deletion - Comictrics</title>
+    <meta name="description" content="Request deletion of your Comictrics account and associated data. We'll process your request within 30 days.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        .deletion-page {
+            padding-top: 120px;
+            padding-bottom: var(--spacing-3xl);
+            min-height: 100vh;
+        }
+        
+        .deletion-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+        
+        .deletion-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .deletion-header h1 {
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .deletion-intro {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .deletion-content {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .info-section {
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .info-section h2 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .info-section h2 i {
+            color: var(--accent-primary);
+            font-size: 1.25rem;
+        }
+        
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-list li {
+            padding: var(--spacing-sm) 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+        }
+        
+        .info-list li i {
+            color: var(--accent-primary);
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+        
+        .timeline-box {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .timeline-box h3 {
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .deletion-form {
+            background: var(--bg-primary);
+            border: 2px solid var(--accent-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .form-group label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .required {
+            color: var(--accent-primary);
+        }
+        
+        .form-help {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: var(--spacing-xs);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 0.25rem;
+        }
+        
+        .checkbox-group label {
+            color: var(--text-secondary);
+            font-weight: normal;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-xl);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: var(--spacing-sm) var(--spacing-xl);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .success-message,
+        .error-message {
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+            display: none;
+        }
+        
+        .success-message {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid #28a745;
+            color: #28a745;
+        }
+        
+        .error-message {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+        }
+        
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid var(--accent-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .warning-box h3 {
+            color: var(--accent-primary);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .btn-danger:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .btn-danger.loading .loading-spinner {
+            display: inline-block;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="assets/comictrics-logo.png" alt="Comictrics" class="logo">
+                </a>
+                <div class="logo-text-container">
+                    <a href="index.html" class="logo-text">COMICTRICS</a>
+                    <a href="index.html" class="logo-tagline">Comic Book Metrics</a>
+                </div>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#pricing" class="nav-link">Pricing</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="privacy.html" class="nav-link">Privacy</a>
+                <a href="support.html" class="nav-link">Support</a>
+                <a href="index.html#download" class="nav-link cta-button">Download App<span class="nav-launching-badge">!</span></a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="deletion-page">
+        <div class="deletion-container">
+            <div class="deletion-header">
+                <h1>Request Account Deletion</h1>
+                <p class="deletion-intro">
+                    We're sorry to see you go. Use this form to request deletion of your Comictrics account and associated data.
+                </p>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <h3><i class="fas fa-check-circle"></i> Request Submitted Successfully</h3>
+                <p>Your account deletion request has been received. We'll process your request within 30 days and send a confirmation email when complete.</p>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage">
+                <h3><i class="fas fa-exclamation-circle"></i> Submission Error</h3>
+                <p id="errorText">There was an error submitting your request. Please try again or contact support directly at comicindexer@gmail.com</p>
+            </div>
+
+            <!-- Important Information -->
+            <div class="deletion-content">
+                <div class="warning-box">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Important: This Action Cannot Be Undone</h3>
+                    <p>Once your account is deleted, all your data will be permanently removed and cannot be recovered. Please ensure you've exported any data you wish to keep before proceeding.</p>
+                </div>
+
+                <div class="info-section">
+                    <h2><i class="fas fa-trash-alt"></i> What Will Be Deleted</h2>
+                    <ul class="info-list">
+                        <li><i class="fas fa-check"></i> Your account profile and login credentials</li>
+                        <li><i class="fas fa-check"></i> All your comic book collection data</li>
+                        <li><i class="fas fa-check"></i> Your watchlist and portfolio information</li>
+                        <li><i class="fas fa-check"></i> Reading history and preferences</li>
+                        <li><i class="fas fa-check"></i> Custom lists and categories</li>
+                        <li><i class="fas fa-check"></i> Performance analytics and metrics</li>
+                        <li><i class="fas fa-check"></i> All app settings and preferences</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h2><i class="fas fa-shield-alt"></i> What May Be Retained</h2>
+                    <ul class="info-list">
+                        <li><i class="fas fa-info-circle"></i> Anonymized analytics data for service improvement</li>
+                        <li><i class="fas fa-info-circle"></i> Transaction records for legal and tax requirements (7 years)</li>
+                        <li><i class="fas fa-info-circle"></i> Communications required for regulatory compliance</li>
+                        <li><i class="fas fa-info-circle"></i> Data necessary to prevent fraud or abuse</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-box">
+                    <h3><i class="fas fa-clock"></i> Deletion Timeline</h3>
+                    <p><strong>Within 48 hours:</strong> Your account will be deactivated and inaccessible</p>
+                    <p><strong>Within 30 days:</strong> All personal data will be permanently deleted from our systems</p>
+                    <p><strong>After 30 days:</strong> Deletion confirmation email will be sent to your registered email address</p>
+                </div>
+            </div>
+
+            <!-- Deletion Request Form -->
+            <div class="deletion-form">
+                <h2>Account Deletion Request Form</h2>
+                <form id="deletionForm">
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="Enter the email associated with your account">
+                        <p class="form-help">This must match the email address associated with your Comictrics account</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Username (Optional)</label>
+                        <input type="text" id="username" name="username" placeholder="Your Comictrics username (if applicable)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reason">Reason for Deletion <span class="required">*</span></label>
+                        <select id="reason" name="reason" required>
+                            <option value="">Select a reason...</option>
+                            <option value="no-longer-use">No longer use the app</option>
+                            <option value="privacy-concerns">Privacy concerns</option>
+                            <option value="too-many-emails">Too many emails/notifications</option>
+                            <option value="switching-apps">Switching to another app</option>
+                            <option value="data-concerns">Concerns about data usage</option>
+                            <option value="account-security">Account security concerns</option>
+                            <option value="other">Other reason</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedback">Additional Feedback (Optional)</label>
+                        <textarea id="feedback" name="feedback" placeholder="Help us improve by sharing any additional feedback about your experience"></textarea>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="confirm" name="confirm" required>
+                        <label for="confirm">
+                            I understand that this action is permanent and all my data will be deleted. I have exported any data I wish to keep. <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="confirmEmail" name="confirmEmail" required>
+                        <label for="confirmEmail">
+                            I confirm that the email address provided above is correct and associated with my Comictrics account. <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="index.html" class="btn-secondary">Cancel</a>
+                        <button type="submit" class="btn-danger" id="submitBtn">
+                            <span>Submit Deletion Request</span>
+                            <span class="loading-spinner"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Alternative Contact -->
+            <div class="deletion-content">
+                <div class="info-section">
+                    <h2><i class="fas fa-envelope"></i> Alternative Contact Method</h2>
+                    <p>If you prefer or if you're experiencing issues with this form, you can also request account deletion by emailing us directly at:</p>
+                    <p style="text-align: center; margin: var(--spacing-lg) 0;">
+                        <a href="mailto:comicindexer@gmail.com?subject=Account Deletion Request" style="color: var(--accent-primary); font-weight: 600; font-size: 1.125rem;">
+                            comicindexer@gmail.com
+                        </a>
+                    </p>
+                    <p>Please include your account email address and username (if applicable) in your deletion request.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html#download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="support.html">Help Center</a></li>
+                        <li><a href="support.html#contact">Contact Us</a></li>
+                        <li><a href="support.html#faq">FAQ</a></li>
+                        <li><a href="delete-account.html">Delete Account</a></li>
+                    </ul>
+                    <h4>Connect</h4>
+                    <ul class="social-links">
+                        <li>
+                            <a href="https://bsky.app/profile/comicindexer.bsky.social" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Comic Indexer on Bluesky">
+                                <i class="fas fa-cloud"></i>
+                                <span>Bluesky</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/comicindexer/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Comic Indexer on Instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://x.com/ComicIndexer" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Follow Comic Indexer on X">
+                                <i class="fab fa-twitter"></i>
+                                <span>X</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="copyright.html">Copyright</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Comictrics. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JSM Integration Script -->
+    <script src="js/jsm-integration.js"></script>
+    <script src="js/common.js"></script>
+</body>
+</html>
