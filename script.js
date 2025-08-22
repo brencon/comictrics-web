@@ -186,8 +186,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     downloadButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            // Prevent default for demo (remove in production)
-            e.preventDefault();
+            // Only prevent default for buttons without real URLs (App Store)
+            if (this.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
             
             // Track download button clicks
             const buttonType = this.classList.contains('app-store') ? 'App Store' : 
@@ -202,9 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 this.style.opacity = '1';
             }, 200);
-            
-            // In production, replace with actual app store links
-            // window.open('https://apps.apple.com/app/comictrics', '_blank');
         });
     });
 });
