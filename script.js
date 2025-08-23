@@ -197,8 +197,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log(`Download button clicked: ${buttonType}`);
             
+            // For Google Play button, ensure it opens in new tab and navigates properly
+            if (this.classList.contains('google-play') && this.getAttribute('href') !== '#') {
+                // Allow the default navigation to proceed
+                this.setAttribute('target', '_blank');
+                this.setAttribute('rel', 'noopener noreferrer');
+            }
+            
             // Show temporary feedback
-            const originalText = this.innerHTML;
             this.style.opacity = '0.7';
             
             setTimeout(() => {
