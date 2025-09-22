@@ -31,7 +31,8 @@
       "Bash(aws configure:*)",
       "Bash(aws s3api get-public-access-block:*)",
       "Bash(aws cloudfront:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(npm run serve:*)"
     ],
     "deny": [],
     "ask": []

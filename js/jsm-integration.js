@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (error) {
                 console.error('Submission error:', error);
-                errorText.textContent = error.message || 'There was an error submitting your request. Please try again or contact support directly at comicindexer@gmail.com';
+                errorText.textContent = error.message || 'There was an error submitting your request. Please try again or contact support directly at support@comictrics.com';
                 errorMessage.style.display = 'block';
                 
                 // Scroll to error message
@@ -237,7 +237,7 @@ async function directAPISubmission(formData) {
     } catch (error) {
         console.error('Direct API submission failed:', error);
         // Final fallback: show error with contact info
-        throw new Error('Unable to submit request automatically. Please contact support directly at comicindexer@gmail.com with your account deletion request.');
+        throw new Error('Unable to submit request automatically. Please contact support directly at support@comictrics.com with your account deletion request.');
     }
 }
 
