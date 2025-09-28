@@ -5,7 +5,7 @@
   "main": "deploy-aws.js",
   "scripts": {
     "deploy": "node deploy-aws.js",
-    "serve": "npx http-server . -p 3000 -o",
+    "serve": "npx http-server . -p 8137 -o",
     "validate": "npx html-validate *.html"
   },
   "keywords": [
